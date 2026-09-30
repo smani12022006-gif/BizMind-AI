@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BizMind AI | Business Decision Engine</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="app-shell">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">B</div>
+                <div>
+                    <h2>BizMind</h2>
+                    <span>AI Decision Engine</span>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active">
+                    <span>⌂</span>
+                    Dashboard
+                </a>
+
+                <a href="#analytics" class="nav-item">
+                    <span>◈</span>
+                    Analytics
+                </a>
+
+                <a href="#ai-insights" class="nav-item">
+                    <span>✦</span>
+                    AI Insights
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="ai-status">
+                    <span class="status-dot"></span>
+                    <div>
+                        <strong>AI Engine</strong>
+                        <small>Ready to analyze</small>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Top Bar -->
+            <header class="topbar">
+
+                <div>
+                    <p class="eyebrow">BUSINESS INTELLIGENCE</p>
+                    <h1>Turn data into decisions.</h1>
+                    <p class="subtitle">
+                        Upload your business data and let BizMind AI uncover
+                        what matters.
+                    </p>
+                </div>
+
+                <button class="ask-gemini-btn" id="askGeminiBtn">
+    <span class="gemini-spark">✦</span>
+    Ask BizMind AI
+</button>
+
+            </header>
+
+
+            <!-- Upload Hero -->
+            <section class="upload-card">
+
+                <div class="upload-content">
+
+                    <div class="upload-icon">
+                        ↑
+                    </div>
+
+                    <h2>Analyze your business data</h2>
+
+                    <p>
+                        Upload a CSV file containing your business data.
+                        BizMind AI will calculate performance metrics,
+                        identify trends and generate recommendations.
+                    </p>
+
+                    <div class="upload-actions">
+
+                        <label class="file-button">
+                            Choose CSV File
+                            <input
+                                type="file"
+                                id="fileInput"
+                                accept=".csv"
+                                hidden
+                            >
+                        </label>
+
+                        <button id="analyzeButton" class="primary-button">
+                            Analyze Data →
+                        </button>
+
+                    </div>
+
+                    <div id="fileName" class="file-name">
+                        No file selected
+                    </div>
+
+                    <div id="status" class="status-message"></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Dashboard -->
+            <section id="dashboard" class="dashboard hidden">
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">OVERVIEW</p>
+                        <h2>Business Performance</h2>
+                    </div>
+
+                    <span class="data-badge">
+                        Live Analysis
+                    </span>
+                </div>
+
+
+                <!-- KPI Cards -->
+                <div class="kpi-grid">
+
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span>Total Sales</span>
+                            <div class="kpi-icon sales">₹</div>
+                        </div>
+                        <h3 id="totalSales">₹0</h3>
+                        <p>Overall revenue</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span>Total Profit</span>
+                            <div class="kpi-icon profit">↗</div>
+                        </div>
+                        <h3 id="totalProfit">₹0</h3>
+                        <p>Overall profit</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span>Top Product</span>
+                            <div class="kpi-icon product">◆</div>
+                        </div>
+                        <h3 id="topProduct">—</h3>
+                        <p>Highest sales</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span>Top Region</span>
+                            <div class="kpi-icon region">◎</div>
+                        </div>
+                        <h3 id="topRegion">—</h3>
+                        <p>Highest sales</p>
+                    </div>
+
+                </div>
+
+
+                <!-- Charts + AI -->
+                <div class="analysis-grid">
+
+                    <div class="panel chart-panel" id="analytics">
+
+                        <div class="panel-header">
+                            <div>
+                                <span class="panel-label">
+                                    PERFORMANCE
+                                </span>
+                                <h3>Business Overview</h3>
+                            </div>
+                        </div>
+
+                        <div class="chart-wrapper">
+                            <canvas id="businessChart"></canvas>
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel ai-panel" id="ai-insights">
+
+                        <div class="panel-header">
+                            <div>
+                                <span class="panel-label">
+                                    AI DECISION ENGINE
+                                </span>
+                                <h3>AI Insights</h3>
+                            </div>
+
+                            <span class="ai-badge">✦ AI</span>
+                        </div>
+
+                        <div id="recommendations">
+
+                            <div class="empty-ai">
+                                <div>✦</div>
+                                <p>
+                                    AI insights will appear here after
+                                    your data is analyzed.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Business Insights -->
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <span class="panel-label">
+                                DATA FINDINGS
+                            </span>
+                            <h3>Business Insights</h3>
+                        </div>
+                    </div>
+
+                    <div id="insights" class="insights-grid"></div>
+
+                </div>
+
+
+                <!-- Product Performance -->
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <span class="panel-label">
+                                PRODUCTS
+                            </span>
+                            <h3>Product Performance</h3>
+                        </div>
+                    </div>
+
+                    <div id="productPerformance"></div>
+
+                </div>
+
+
+                <!-- Regional Performance -->
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <span class="panel-label">
+                                REGIONS
+                            </span>
+                            <h3>Regional Performance</h3>
+                        </div>
+                    </div>
+
+                    <div id="regionPerformance"></div>
+
+                </div>
+
+
+                <!-- Monthly Trend -->
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <span class="panel-label">
+                                TRENDS
+                            </span>
+                            <h3>Monthly Sales Trend</h3>
+                        </div>
+                    </div>
+
+                    <div class="trend-wrapper">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+    <!-- Ask Gemini Panel -->
+
+<div class="gemini-overlay" id="geminiOverlay"></div>
+
+<aside class="gemini-panel" id="geminiPanel">
+
+    <div class="gemini-header">
+
+        <div class="gemini-title">
+            <div class="gemini-icon">✦</div>
+
+            <div>
+                <strong>Ask BizMind AI</strong>
+                <span>Business Data Assistant</span>
+            </div>
+        </div>
+
+        <button class="gemini-close" id="closeGemini">
+            ×
+        </button>
+
+    </div>
+
+
+    <div class="gemini-body" id="geminiMessages">
+
+        <div class="gemini-welcome">
+
+            <div class="welcome-icon">✦</div>
+
+            <h3>How can I help?</h3>
+
+            <p>
+                Ask questions about your uploaded business
+                data and I'll help you understand it.
+            </p>
+
+            <div class="suggestion-list">
+
+                <button class="suggestion">
+                    Which product performs best?
+                </button>
+
+                <button class="suggestion">
+                    Which region needs attention?
+                </button>
+
+                <button class="suggestion">
+                    What are the main business risks?
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="gemini-input-area">
+
+        <input
+            type="text"
+            id="geminiInput"
+            placeholder="Ask about your business data..."
+        >
+
+        <button id="sendGemini">
+            →
+        </button>
+
+    </div>
+
+</aside>
+
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+</html>
