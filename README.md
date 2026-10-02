@@ -213,7 +213,7 @@ pip install -r requirements.txt
 Add API Key
 Create a `.env` file:
 ```env
-OPENROUTER_API_KEY=YOUR_API_KEY
+OPENROUTER_API_KEY=
 ```
 Do not publish the real API key in GitHub.
 Run the Application
@@ -237,7 +237,7 @@ requests
 17. Environment Variables
 The application uses:
 ```env
-OPENROUTER_API_KEY=YOUR_API_KEY
+OPENROUTER_API_KEY=
 ```
 Keep the API key private.
 The `.gitignore` file contains:
@@ -257,7 +257,7 @@ The free hosting instance may take some time to wake up after inactivity.
 19. Demo Video
 Add the final public demo video link here:
 ```text
-[ADD YOUR DEMO VIDEO LINK HERE]
+https://youtu.be/OfkGB32Fcc0?si=loVcyUjBDuo6f0hs
 ```
 The video should demonstrate:
 Opening the application.
